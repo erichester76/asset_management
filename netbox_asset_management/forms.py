@@ -1,6 +1,6 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
-from netbox.forms import NetBoxModelForm, CSVModelForm
+from netbox.forms import NetBoxModelForm, BulkImportForm
 from utilities.forms import DynamicModelChoiceField, DynamicModelMultipleChoiceField, CommentField, MarkdownField
 from .models import PurchaseOrder, License, SupportContract, AssetInformation
 
@@ -25,7 +25,7 @@ class PurchaseOrderForm(NetBoxModelForm):
         model = PurchaseOrder
         fields = ('po_number', 'supplier', 'purchase_date', 'total_cost', 'status', 'tenant', 'contact', 'notes')
 
-class PurchaseOrderBulkImportForm(CSVModelForm):
+class PurchaseOrderBulkImportForm(BulkImportForm):
     supplier = DynamicModelChoiceField(
         queryset=Manufacturer.objects.all(),
         to_field_name='name',
@@ -76,7 +76,7 @@ class LicenseForm(NetBoxModelForm):
         model = License
         fields = ('license_key', 'product_name', 'license_type', 'start_date', 'end_date', 'quantity', 'vendor', 'tenant', 'contact', 'purchase_order', 'notification_before_expiry', 'notes', 'unit_cost')
 
-class LicenseBulkImportForm(CSVModelForm):
+class LicenseBulkImportForm(BulkImportForm):
     vendor = DynamicModelChoiceField(
         queryset=Manufacturer.objects.all(),
         to_field_name='name',
@@ -133,7 +133,7 @@ class SupportContractForm(NetBoxModelForm):
         model = SupportContract
         fields = ('contract_number', 'description', 'start_date', 'end_date', 'vendor', 'tenant', 'contact', 'purchase_order', 'notification_before_expiry', 'notes')
 
-class SupportContractBulkImportForm(CSVModelForm):
+class SupportContractBulkImportForm(BulkImportForm):
     vendor = DynamicModelChoiceField(
         queryset=Manufacturer.objects.all(),
         to_field_name='name',
@@ -190,7 +190,6 @@ class AssetInformationForm(NetBoxModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # This is a hacky way to set the label for the content_object field which is actually a combination of content_type and object_id
         self.fields['content_object'] = forms.CharField(
             label=_("Associated Object"),
             required=False,
@@ -209,7 +208,7 @@ class AssetInformationForm(NetBoxModelForm):
                 self.add_error('object_id', _("Object does not exist for the given type and ID."))
         return cleaned_data
 
-class AssetInformationBulkImportForm(CSVModelForm):
+class AssetInformationBulkImportForm(BulkImportForm):
     purchase_order = DynamicModelChoiceField(
         queryset=PurchaseOrder.objects.all(),
         to_field_name='po_number',
