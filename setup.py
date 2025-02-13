@@ -4,7 +4,7 @@ import os
 
 # Get version from version file
 VERSION = {}
-with open(os.path.join('netbox_asset_management', 'version.py'), as_file) as fp:
+with open(os.path.join('netbox_asset_management', 'version.py')) as fp:
     exec(fp.read(), VERSION)
 
 setup(
