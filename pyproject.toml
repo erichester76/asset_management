@@ -39,11 +39,11 @@ test = [
 [project.urls]
 Documentation = "https://github.com/erichester76/asset_management/blob/main/README.md"
 Source = "https://github.com/erichester76/asset_management"
-Tracker = "https://github.com/erichester76/aasset_management/issues"
+Tracker = "https://github.com/erichester76/asset_management/issues"
 
 [tool.black]
 line-length = 120
 target-version = ["py39", "py310", "py311", "py312"]
 
 [tool.setuptools.package-data]
-netbox_cmdb_lite = ["templates/**"]
+asset_management = ["templates/**"]
