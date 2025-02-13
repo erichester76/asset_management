@@ -29,11 +29,11 @@ class AssetInformationType:
 # Define Query type
 @strawberry.type
 class Query:
-    purchase_orders: List[PurchaseOrderType] = strawberry_django.field()
+    purchase_orders: list[PurchaseOrderType] = strawberry_django.field()
     license: LicenseType = strawberry_django.field(django_auto())
-    licenses: List[LicenseType] = strawberry_django.field()
-    support_contracts: List[SupportContractType] = strawberry_django.field()
-    assets: List[AssetInformationType] = strawberry_django.field()
+    licenses: list[LicenseType] = strawberry_django.field()
+    support_contracts: list[SupportContractType] = strawberry_django.field()
+    assets: list[AssetInformationType] = strawberry_django.field()
 
 # Define Mutations if needed (example for PurchaseOrder)
 @strawberry.type
