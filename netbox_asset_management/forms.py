@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
 from netbox.forms import NetBoxModelForm, NetBoxModelImportForm
-from utilities.forms import DynamicModelChoiceField, DynamicModelMultipleChoiceField, CommentField, MarkdownField
+from utilities.forms.fields import DynamicModelChoiceField, DynamicModelMultipleChoiceField, CommentField, MarkdownField
 from .models import PurchaseOrder, License, SupportContract, AssetInformation
 
 class PurchaseOrderForm(NetBoxModelForm):
