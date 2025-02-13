@@ -1,6 +1,6 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
-from netbox.forms import NetBoxModelForm, NetBoxBulkImportForm
+from netbox.forms import NetBoxModelForm, NetBoxModelImportForm
 from utilities.forms import DynamicModelChoiceField, DynamicModelMultipleChoiceField, CommentField, MarkdownField
 from .models import PurchaseOrder, License, SupportContract, AssetInformation
 
@@ -25,7 +25,7 @@ class PurchaseOrderForm(NetBoxModelForm):
         model = PurchaseOrder
         fields = ('po_number', 'supplier', 'purchase_date', 'total_cost', 'status', 'tenant', 'contact', 'notes')
 
-class PurchaseOrderBulkImportForm(NetBoxBulkImportForm):
+class PurchaseOrderBulkImportForm(NetBoxModelImportForm):
     supplier = DynamicModelChoiceField(
         queryset=Manufacturer.objects.all(),
         to_field_name='name',
@@ -76,7 +76,7 @@ class LicenseForm(NetBoxModelForm):
         model = License
         fields = ('license_key', 'product_name', 'license_type', 'start_date', 'end_date', 'quantity', 'vendor', 'tenant', 'contact', 'purchase_order', 'notification_before_expiry', 'notes', 'unit_cost')
 
-class LicenseBulkImportForm(NetBoxBulkImportForm):
+class LicenseBulkImportForm(NetBoxModelImportForm):
     vendor = DynamicModelChoiceField(
         queryset=Manufacturer.objects.all(),
         to_field_name='name',
@@ -199,7 +199,7 @@ class AssetInformationForm(NetBoxModelForm):
     def clean(self):
         cleaned_data = super().clean()
         content_type = cleaned_data.get('content_type')
-        object_id = cleaned_data.get('object_id')
+        object_id = cleaned_data.get('o7bject_id')
         if content_type and object_id:
             try:
                 content_object = content_type.get_object_for_this_type(pk=object_id)
@@ -208,7 +208,7 @@ class AssetInformationForm(NetBoxModelForm):
                 self.add_error('object_id', _("Object does not exist for the given type and ID."))
         return cleaned_data
 
-class AssetInformationBulkImportForm(NetBoxBulkImportForm):
+class AssetInformationBulkImportForm(NetBoxModelImportForm):
     purchase_order = DynamicModelChoiceField(
         queryset=PurchaseOrder.objects.all(),
         to_field_name='po_number',
