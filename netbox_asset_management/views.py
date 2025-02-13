@@ -1,7 +1,6 @@
 from django.contrib import messages
 from django.urls import reverse_lazy
-from netbox.views import (ObjectListView, ObjectEditView, ObjectDeleteView, ObjectView, 
-                          BulkImportView, BulkEditView, BulkDeleteView, ObjectChangeLogView)
+from netbox.views.generic import ObjectListView, ObjectEditView, ObjectDeleteView, ObjectView, BulkImportView, BulkEditView, BulkDeleteView, ObjectChangeLogView
 from utilities.forms import ConfirmationForm
 from .models import PurchaseOrder, License, SupportContract, AssetInformation
 from .forms import (PurchaseOrderForm, LicenseForm, SupportContractForm, AssetInformationForm,
