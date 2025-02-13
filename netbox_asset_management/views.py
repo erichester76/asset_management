@@ -9,7 +9,8 @@ from .forms import (PurchaseOrderForm, LicenseForm, SupportContractForm, AssetIn
 from .filters import PurchaseOrderFilterSet, LicenseFilterSet, SupportContractFilterSet, AssetInformationFilterSet
 from .tables import PurchaseOrderTable, LicenseTable, SupportContractTable, AssetInformationTable
 
-from dcim.models import Device, VirtualMachine, Module, InventoryItem
+from dcim.models import Device, Module, InventoryItem
+from virtualization.models import VirtualMachine
 
 class BaseAssetView(ObjectView):
     template_name = 'netbox_asset_management/base_asset_tab.html'

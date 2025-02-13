@@ -3,7 +3,8 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.utils.translation import gettext_lazy as _
 from netbox.models import NetBoxModel
-from dcim.models import Device, VirtualMachine, Location, Module, InventoryItem
+from dcim.models import Device, Location, Module, InventoryItem
+from virtualization.models import VirtualMachine
 from dcim.choices import DeviceStatusChoices
 from dcim.models import Manufacturer
 from tenancy.models import Tenant
