@@ -1,35 +1,30 @@
 import strawberry
 from strawberry import auto
-from strawberry.django import field
-from strawberry_django import DjangoObjectType, auto as django_auto
+from strawberry_django import field
 from .models import PurchaseOrder, License, SupportContract, AssetInformation
 from django.contrib.contenttypes.models import ContentType
 
-# Define GraphQL types for each model
+# Define types for each model
 @strawberry_django.type(PurchaseOrder)
-class PurchaseOrderType(DjangoObjectType):
+class PurchaseOrderType:
     class Meta:
         model = PurchaseOrder
         fields = '__all__'
-
 @strawberry_django.type(License)
-class LicenseType(DjangoObjectType):
+class LicenseType:
     class Meta:
         model = License
         fields = '__all__'
-
 @strawberry_django.type(SupportContract)
-class SupportContractType(DjangoObjectType):
+class SupportContractType:
     class Meta:
         model = SupportContract
         fields = '__all__'
-
 @strawberry_django.type(AssetInformation)
-class AssetInformationType(DjangoObjectType):
+class AssetInformationType:
     class Meta:
         model = AssetInformation
         fields = '__all__'
-
 # Define Query type
 @strawberry.type
 class Query:
