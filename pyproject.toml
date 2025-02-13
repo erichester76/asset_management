@@ -1,40 +1,49 @@
+# See PEP 518 for the spec of this file
+# https://www.python.org/dev/peps/pep-0518/
+
 [build-system]
-requires = ["setuptools", "wheel"]
+requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "netbox-asset-management"
-version = "0.0.1"  # You might want to dynamically read this from version.py
-description = "NetBox Plugin for Asset Management"
-readme = "README.md"
-requires-python = ">=3.8"
+version = "0.1.0"
 authors = [
-    { name="Eric Hester", email="hester1@clemson.edu" },
+    { name = "Eric Hester", email = "hester1@clemson.edu" },
 ]
-license = { text = "Apache 2.0" }
-keywords = ["netbox", "plugin", "asset management"]
+description = "A lightweight Asset plugin for NetBox."
+readme = "README.md"
+
 classifiers = [
-    "Framework :: Django",
-    "Framework :: Django :: 4.0",
-    "License :: OSI Approved :: Apache Software License",
-    "Operating System :: OS Independent",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3 :: Only",
     "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+requires-python = ">=3.10.0"
+
+[project.optional-dependencies]
+test = [
+    "black==24.3.0",
+    "check-manifest==0.49",
+    "flake8",
+    "flake8-pyproject",
+    "pre-commit==3.7.0",
+    "pytest==8.1.1",
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/erichester76/asset_management"
+Documentation = "https://github.com/erichester76/asset_management/blob/main/README.md"
+Source = "https://github.com/erichester76/asset_management"
+Tracker = "https://github.com/erichester76/aasset_management/issues"
 
-[tool.setuptools.packages.find]
-where = ["."]  # Look for packages in the current directory
+[tool.black]
+line-length = 120
+target-version = ["py39", "py310", "py311", "py312"]
 
 [tool.setuptools.package-data]
-"*" = ["*.txt", "*.md", "*.html", "*.js", "*.css", "*.png", "*.jpg", "*.jpeg", "*.gif", "templates/*", "static/*"]  # Adjust as needed for your package data
-
-[tool.setuptools.dynamic]
-version = {attr = "netbox_asset_management.version.__version__"}
-
-[project.entry-points."netbox.plugins"]
-netbox_asset_management = "netbox_asset_management"
+netbox_cmdb_lite = ["templates/**"]
