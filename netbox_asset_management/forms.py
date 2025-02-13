@@ -1,12 +1,8 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
-from netbox.forms import NetBoxModelForm, DynamicModelChoiceField, DynamicModelMultipleChoiceField, CSVModelForm
-from utilities.forms import CommentField, MarkdownField
+from netbox.forms import NetBoxModelForm, CSVModelForm
+from utilities.forms import DynamicModelChoiceField, DynamicModelMultipleChoiceField, CommentField, MarkdownField
 from .models import PurchaseOrder, License, SupportContract, AssetInformation
-from dcim.models import Manufacturer, Location
-from tenancy.models import Tenant
-from django.contrib.contenttypes.models import ContentType
-from users.models import User
 
 class PurchaseOrderForm(NetBoxModelForm):
     supplier = DynamicModelChoiceField(
@@ -53,6 +49,7 @@ class PurchaseOrderBulkImportForm(CSVModelForm):
         model = PurchaseOrder
         fields = ('po_number', 'supplier', 'purchase_date', 'total_cost', 'status', 'tenant', 'contact', 'notes')
 
+# License Form
 class LicenseForm(NetBoxModelForm):
     vendor = DynamicModelChoiceField(
         queryset=Manufacturer.objects.all(),
@@ -109,6 +106,7 @@ class LicenseBulkImportForm(CSVModelForm):
         model = License
         fields = ('license_key', 'product_name', 'license_type', 'start_date', 'end_date', 'quantity', 'vendor', 'tenant', 'contact', 'purchase_order', 'notification_before_expiry', 'notes', 'unit_cost')
 
+# SupportContract Form
 class SupportContractForm(NetBoxModelForm):
     vendor = DynamicModelChoiceField(
         queryset=Manufacturer.objects.all(),
@@ -165,6 +163,7 @@ class SupportContractBulkImportForm(CSVModelForm):
         model = SupportContract
         fields = ('contract_number', 'description', 'start_date', 'end_date', 'vendor', 'tenant', 'contact', 'purchase_order', 'notification_before_expiry', 'notes')
 
+# AssetInformation Form
 class AssetInformationForm(NetBoxModelForm):
     purchase_order = DynamicModelChoiceField(
         queryset=PurchaseOrder.objects.all(),
