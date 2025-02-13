@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "netbox-asset-management"
+version = "0.0.1"  # You might want to dynamically read this from version.py
+description = "NetBox Plugin for Asset Management"
+readme = "README.md"
+requires-python = ">=3.8"
+authors = [
+    { name="Eric Hester", email="hester1@clemson.edu" },
+]
+license = { text = "Apache 2.0" }
+keywords = ["netbox", "plugin", "asset management"]
+classifiers = [
+    "Framework :: Django",
+    "Framework :: Django :: 4.0",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/erichester76/asset_management"
+
+[tool.setuptools.packages.find]
+where = ["."]  # Look for packages in the current directory
+
+[tool.setuptools.package-data]
+"*" = ["*.txt", "*.md", "*.html", "*.js", "*.css", "*.png", "*.jpg", "*.jpeg", "*.gif", "templates/*", "static/*"]  # Adjust as needed for your package data
+
+[tool.setuptools.dynamic]
+version = {attr = "netbox_asset_management.version.__version__"}
+
+[project.entry-points."netbox.plugins"]
+netbox_asset_management = "netbox_asset_management"
