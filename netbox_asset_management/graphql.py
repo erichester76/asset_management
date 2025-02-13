@@ -1,6 +1,7 @@
 import strawberry
 from strawberry import auto
 from strawberry_django import field
+import strawberry_django 
 from .models import PurchaseOrder, License, SupportContract, AssetInformation
 from django.contrib.contenttypes.models import ContentType
 
