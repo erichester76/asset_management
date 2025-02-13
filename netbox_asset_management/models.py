@@ -151,20 +151,31 @@ class AssetInformation(NetBoxModel):
     unit_cost = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     notes = models.TextField(blank=True)
 
+    licenses = models.ManyToManyField(
+        License,
+        related_name='assets',
+        blank=True,
+        through='AssetLicense'
+    )
+    support_contracts = models.ManyToManyField(
+        SupportContract,
+        related_name='assets',
+        blank=True,
+        through='AssetSupportContract'
+    )
     class Meta:
         verbose_name_plural = "Asset Information"
-
     def __str__(self):
         return f"{self.content_object} Asset Info"
-
-# Define ManyToMany relationships for licenses and support contracts
-AssetInformation.licenses.through = models.ManyToManyField(
-    License,
-    related_name='assets',
-    blank=True
-)
-AssetInformation.support_contracts.through = models.ManyToManyField(
-    SupportContract,
-    related_name='assets',
-    blank=True
-)
+    
+class AssetLicense(NetBoxModel):
+    asset = models.ForeignKey(AssetInformation, on_delete=models.CASCADE)
+    license = models.ForeignKey(License, on_delete=models.CASCADE)
+    class Meta:
+        unique_together = ('asset', 'license')
+        
+class AssetSupportContract(NetBoxModel):
+    asset = models.ForeignKey(AssetInformation, on_delete=models.CASCADE)
+    support_contract = models.ForeignKey(SupportContract, on_delete=models.CASCADE)
+    class Meta:
+        unique_together = ('asset', 'support_contract')

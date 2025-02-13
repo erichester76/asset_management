@@ -1,0 +1,64 @@
+{% extends 'generic/object_view.html' %}
+{% load render_table from django_tables2 %}
+
+{% block content %}
+    <div class="panel panel-default">
+        <div class="panel-heading"><strong>Asset Information</strong></div>
+        <div class="panel-body">
+            {% if asset %}
+                <h4>Asset Details</h4>
+                <dl class="dl-horizontal">
+                    <dt>Serial Number:</dt><dd>{{ asset.serial_number }}</dd>
+                    <dt>Asset Tag:</dt><dd>{{ asset.asset_tag }}</dd>
+                    <dt>Quantity:</dt><dd>{{ asset.quantity }}</dd>
+                    <dt>Warranty Start:</dt><dd>{{ asset.warranty_start|date:"Y-m-d" }}</dd>
+                    <dt>Warranty End:</dt><dd>{{ asset.warranty_end|date:"Y-m-d" }}</dd>
+                    <dt>Status:</dt><dd>{{ asset.get_status_display }}</dd>
+                    <dt>Unit Cost:</dt><dd>{{ asset.unit_cost }}</dd>
+                </dl>
+                
+                <h4>Purchase Order</h4>
+                {% if purchase_order %}
+                    <a href="{% url 'plugins:netbox_asset_management:purchaseorder_detail' purchase_order.pk %}">{{ purchase_order.po_number }}</a>
+                {% else %}
+                    <p>No Purchase Order Associated</p>
+                {% endif %}
+
+                <h4>Licenses</h4>
+                {% if licenses %}
+                    {% render_table licenses_table %}
+                {% else %}
+                    <p>No Licenses Associated</p>
+                {% endif %}
+
+                <h4>Support Contracts</h4>
+                {% if support_contracts %}
+                    {% render_table support_contracts_table %}
+                {% else %}
+                    <p>No Support Contracts Associated</p>
+                {% endif %}
+            {% else %}
+                <p>No asset information available for this item.</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block tables %}
+    {% if licenses %}
+        {% render_table licenses_table %}
+    {% endif %}
+    {% if support_contracts %}
+        {% render_table support_contracts_table %}
+    {% endif %}
+{% endblock %}
+
+{% block javascript %}
+    {{ block.super }}
+    {% if licenses %}
+        {% render_table licenses_table "json" %}
+    {% endif %}
+    {% if support_contracts %}
+        {% render_table support_contracts_table "json" %}
+    {% endif %}
+{% endblock %}
