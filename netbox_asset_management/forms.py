@@ -3,6 +3,11 @@ from django.utils.translation import gettext_lazy as _
 from netbox.forms import NetBoxModelForm, NetBoxModelImportForm
 from utilities.forms.fields import DynamicModelChoiceField
 from .models import PurchaseOrder, License, SupportContract, AssetInformation
+from dcim.models import Device, Location, Module, InventoryItem, Manufacturer
+from virtualization.models import VirtualMachine
+from tenancy.models import Tenant
+from users.models import User
+from django.contrib.contenttypes.models import ContentType
 
 class PurchaseOrderForm(NetBoxModelForm):
     supplier = DynamicModelChoiceField(

@@ -4,7 +4,7 @@ from netbox.filtersets import NetBoxModelFilterSet
 from utilities.filters import ContentTypeFilter
 from .models import PurchaseOrder, License, SupportContract, AssetInformation
 from dcim.choices import DeviceStatusChoices
-from dcim.models import Manufacturer
+from dcim.models import Manufacturer, Location 
 from tenancy.models import Tenant
 
 class PurchaseOrderFilterSet(NetBoxModelFilterSet):
