@@ -129,7 +129,7 @@ class AssetInformationFilterSet(NetBoxModelFilterSet):
         label='Location',
     )
     status = MultipleChoiceFilter(
-        choices=DeviceStatusChoices.choices,
+        choices=DeviceStatusChoices,
         null_value=None,
         label='Status',
     )
