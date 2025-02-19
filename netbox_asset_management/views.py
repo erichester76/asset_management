@@ -5,7 +5,7 @@ from utilities.forms import ConfirmationForm
 from .models import PurchaseOrder, License, SupportContract, AssetInformation
 from .forms import (PurchaseOrderForm, LicenseForm, SupportContractForm, AssetInformationForm,
                     PurchaseOrderBulkImportForm, LicenseBulkImportForm, SupportContractBulkImportForm, AssetInformationBulkImportForm)
-from .filters import PurchaseOrderFilterSet, LicenseFilterSet, SupportContractFilterSet, AssetInformationFilterSet
+from .filtersets import PurchaseOrderFilterSet, LicenseFilterSet, SupportContractFilterSet, AssetInformationFilterSet
 from .tables import PurchaseOrderTable, LicenseTable, SupportContractTable, AssetInformationTable
 
 from dcim.models import Device, Module, InventoryItem
