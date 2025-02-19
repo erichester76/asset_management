@@ -1,5 +1,5 @@
 from django.db.models import Q
-from django_filters import ModelChoiceFilter, DateFilter, DateTimeFilter, MultipleChoiceFilter
+from django_filters import ModelChoiceFilter, DateFilter, DateTimeFilter, MultipleChoiceFilter, CharFilter
 from netbox.filtersets import NetBoxModelFilterSet
 from utilities.filters import ContentTypeFilter
 from .models import PurchaseOrder, License, SupportContract, AssetInformation
@@ -8,7 +8,7 @@ from dcim.models import Manufacturer, Location
 from tenancy.models import Tenant
 
 class PurchaseOrderFilterSet(NetBoxModelFilterSet):
-    q = django_filters.CharFilter(
+    q = CharFilter(
         method='search',
         label='Search',
     )
@@ -44,7 +44,7 @@ class PurchaseOrderFilterSet(NetBoxModelFilterSet):
         fields = ['id', 'po_number', 'supplier', 'purchase_date', 'total_cost', 'status', 'tenant', 'contact']
 
 class LicenseFilterSet(NetBoxModelFilterSet):
-    q = django_filters.CharFilter(
+    q = CharFilter(
         method='search',
         label='Search',
     )
@@ -78,7 +78,7 @@ class LicenseFilterSet(NetBoxModelFilterSet):
         fields = ['id', 'license_key', 'product_name', 'license_type', 'start_date', 'end_date', 'quantity', 'vendor', 'tenant', 'contact']
 
 class SupportContractFilterSet(NetBoxModelFilterSet):
-    q = django_filters.CharFilter(
+    q = CharFilter(
         method='search',
         label='Search',
     )
@@ -112,7 +112,7 @@ class SupportContractFilterSet(NetBoxModelFilterSet):
         fields = ['id', 'contract_number', 'description', 'start_date', 'end_date', 'vendor', 'tenant', 'contact']
 
 class AssetInformationFilterSet(NetBoxModelFilterSet):
-    q = django_filters.CharFilter(
+    q = CharFilter(
         method='search',
         label='Search',
     )
