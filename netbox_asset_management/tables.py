@@ -1,10 +1,9 @@
 from django_tables2 import tables, Column, DateTimeColumn, TemplateColumn
 from django.utils.html import format_html
 from .models import PurchaseOrder, License, SupportContract, AssetInformation
-from utilities.tables import BaseTable, ToggleColumn
+from netbox.tables import NetBoxTable
 
-class PurchaseOrderTable(BaseTable):
-    pk = ToggleColumn()
+class PurchaseOrderTable(NetBoxTable):
     po_number = tables.Column(linkify=True)
     supplier = tables.Column(linkify=True)
     purchase_date = DateTimeColumn(format='Y-m-d')
@@ -16,13 +15,12 @@ class PurchaseOrderTable(BaseTable):
     created = DateTimeColumn(format='Y-m-d H:i')
     last_updated = DateTimeColumn(format='Y-m-d H:i')
 
-    class Meta(BaseTable.Meta):
+    class Meta:
         model = PurchaseOrder
         fields = ('pk', 'po_number', 'supplier', 'purchase_date', 'total_cost', 'status', 'tenant', 'contact', 'notes', 'created', 'last_updated')
         default_columns = ('pk', 'po_number', 'supplier', 'purchase_date', 'status', 'tenant', 'contact')
 
-class LicenseTable(BaseTable):
-    pk = ToggleColumn()
+class LicenseTable(NetBoxTable):
     license_key = tables.Column(linkify=True)
     product_name = tables.Column()
     license_type = tables.Column()
@@ -39,13 +37,12 @@ class LicenseTable(BaseTable):
     created = DateTimeColumn(format='Y-m-d H:i')
     last_updated = DateTimeColumn(format='Y-m-d H:i')
 
-    class Meta(BaseTable.Meta):
+    class Meta:
         model = License
         fields = ('pk', 'license_key', 'product_name', 'license_type', 'start_date', 'end_date', 'quantity', 'vendor', 'tenant', 'contact', 'purchase_order', 'notification_before_expiry', 'notes', 'unit_cost', 'created', 'last_updated')
         default_columns = ('pk', 'license_key', 'product_name', 'license_type', 'start_date', 'end_date', 'quantity', 'vendor', 'tenant', 'contact')
 
-class SupportContractTable(BaseTable):
-    pk = ToggleColumn()
+class SupportContractTable(NetBoxTable):
     contract_number = tables.Column(linkify=True)
     description = tables.Column()
     start_date = DateTimeColumn(format='Y-m-d')
@@ -59,13 +56,12 @@ class SupportContractTable(BaseTable):
     created = DateTimeColumn(format='Y-m-d H:i')
     last_updated = DateTimeColumn(format='Y-m-d H:i')
 
-    class Meta(BaseTable.Meta):
+    class Meta:
         model = SupportContract
         fields = ('pk', 'contract_number', 'description', 'start_date', 'end_date', 'vendor', 'tenant', 'contact', 'purchase_order', 'notification_before_expiry', 'notes', 'created', 'last_updated')
         default_columns = ('pk', 'contract_number', 'description', 'start_date', 'end_date', 'vendor', 'tenant', 'contact')
 
-class AssetInformationTable(BaseTable):
-    pk = ToggleColumn()
+class AssetInformationTable(NetBoxTable):
     content_object = Column(accessor='content_object', verbose_name='Associated Object', linkify=True)
     purchase_order = tables.Column(linkify=True)
     quantity = tables.Column()
@@ -80,7 +76,7 @@ class AssetInformationTable(BaseTable):
     created = DateTimeColumn(format='Y-m-d H:i')
     last_updated = DateTimeColumn(format='Y-m-d H:i')
 
-    class Meta(BaseTable.Meta):
+    class Meta:
         model = AssetInformation
         fields = ('pk', 'content_object', 'purchase_order', 'quantity', 'warranty_start', 'warranty_end', 'status', 'serial_number', 'asset_tag', 'location', 'unit_cost', 'notes', 'created', 'last_updated')
         default_columns = ('pk', 'content_object', 'purchase_order', 'quantity', 'warranty_start', 'warranty_end', 'status', 'location')
