@@ -50,10 +50,10 @@ urlpatterns = [
     path('assets/<int:pk>/changelog/', views.AssetInformationChangelogView.as_view(), name='asset_changelog'),
     
     # Tabs
-    path('dcim/devices/<int:pk>/asset/', DeviceAssetView.as_view(), name='device_asset'),
-    path('virtualization/virtual-machines/<int:pk>/asset/', VirtualMachineAssetView.as_view(), name='virtualmachine_asset'),
-    path('dcim/modules/<int:pk>/asset/', ModuleAssetView.as_view(), name='module_asset'),
-    path('dcim/inventory-items/<int:pk>/asset/', InventoryItemAssetView.as_view(), name='inventoryitem_asset'),
+    path('dcim/devices/<int:pk>/asset/', views.DeviceAssetView.as_view(), name='device_asset'),
+    path('virtualization/virtual-machines/<int:pk>/asset/', views.VirtualMachineAssetView.as_view(), name='virtualmachine_asset'),
+    path('dcim/modules/<int:pk>/asset/', views.ModuleAssetView.as_view(), name='module_asset'),
+    path('dcim/inventory-items/<int:pk>/asset/', views.InventoryItemAssetView.as_view(), name='inventoryitem_asset'),
 
 
 ]
