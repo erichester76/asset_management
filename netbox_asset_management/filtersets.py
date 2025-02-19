@@ -2,10 +2,11 @@ from django.db.models import Q
 from django_filters import ModelChoiceFilter, DateFilter, DateTimeFilter, MultipleChoiceFilter, CharFilter
 from netbox.filtersets import NetBoxModelFilterSet
 from utilities.filters import ContentTypeFilter
-from .models import PurchaseOrder, License, SupportContract, AssetInformation
+from .models import PurchaseOrder, License, SupportContract, AssetInformation, PurchaseOrderStatusChoices
 from dcim.choices import DeviceStatusChoices
 from dcim.models import Manufacturer, Location 
 from tenancy.models import Tenant
+from users.models import User
 
 class PurchaseOrderFilterSet(NetBoxModelFilterSet):
     q = CharFilter(
